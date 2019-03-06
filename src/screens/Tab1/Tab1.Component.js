@@ -29,7 +29,7 @@ var Tab1 = /** @class */ (function (_super) {
         var user = this.props.user;
         return (react_1.default.createElement(react_native_1.View, { style: styles_1.default.container },
             react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, "Welcome User"),
-            react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, user.email)));
+            react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, user.name)));
     };
     return Tab1;
 }(react_1.default.Component));

@@ -18,7 +18,7 @@ class Tab1 extends React.Component<Props> {
                     Welcome User
                 </Text>
                 <Text style={styles.heading}>
-                    {user.email}
+                    {user.name}
                 </Text>
             </View>
         );

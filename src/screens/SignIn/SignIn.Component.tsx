@@ -1,6 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, AsyncStorage} from 'react-native';
 import {connect} from "react-redux";
+import Snackbar from 'react-native-snackbar';
 
 import {resetHomeAction} from '../../navigation/AppContainer';
 import InputText from '../../components/InputText/InputText.Component';
@@ -9,6 +10,7 @@ import {setUser} from '../../store/action';
 import {isValidEmail} from "../../utils/validation";
 
 import styles from './styles';
+import {KEY_USERS} from "../../utils/constant";
 
 interface Props {
     navigation: object;
@@ -34,7 +36,7 @@ class SignIn extends React.Component<Props, State> {
         }
     }
 
-    onSignIn = () => {
+    onSignIn = async () => {
         console.log("state", this.state);
         const {email, password} = this.state;
         let emailError, passwordError;
@@ -49,7 +51,19 @@ class SignIn extends React.Component<Props, State> {
         }
         this.setState({emailError, passwordError});
         if (isError) return;
-        this.props.setUser({email});
+        let users = await AsyncStorage.getItem(KEY_USERS);
+
+        users = !users ? [] : JSON.parse(users);
+
+        const user = users.find(user => user.email === email && user.password === password);
+        if (!user) {
+            Snackbar.show({
+                title: 'Invalid Login details',
+            });
+            return;
+        }
+
+        this.props.setUser(user);
         this.props.navigation.dispatch(resetHomeAction);
     };
 

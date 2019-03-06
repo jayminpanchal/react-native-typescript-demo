@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, AsyncStorage} from 'react-native';
 import {connect} from "react-redux";
+import Snackbar from 'react-native-snackbar';
 
 import InputText from '../../components/InputText/InputText.Component';
 import Button from '../../components/Button/Button.Component';
@@ -8,10 +9,12 @@ import {setUser} from '../../store/action';
 
 import styles from "./styles";
 import {isValidEmail} from "../../utils/validation";
+import {KEY_USERS} from "../../utils/constant";
 import {resetHomeAction} from "../../navigation/AppContainer";
 
 interface Props {
     navigation: any;
+    setUser: any;
 }
 
 interface State {
@@ -37,7 +40,7 @@ class SignUp extends React.Component<Props, State> {
         }
     }
 
-    onSignUp = () => {
+    onSignUp = async () => {
         const {name, email, password} = this.state;
         let nameError, emailError, passwordError;
         let isError = false;
@@ -55,7 +58,21 @@ class SignUp extends React.Component<Props, State> {
         }
         this.setState({nameError, emailError, passwordError});
         if (isError) return;
-        this.props.setUser({name, email});
+
+        let users = await AsyncStorage.getItem(KEY_USERS);
+        users = !users ? [] : JSON.parse(users);
+
+        const existUser = users.find(user => user.email === email);
+        if (existUser) {
+            Snackbar.show({
+                title: 'User already exist',
+            });
+            return;
+        }
+
+        users.push({name, email, password});
+        await AsyncStorage.setItem(KEY_USERS, JSON.stringify(users));
+        this.props.setUser({name, email, password});
         this.props.navigation.dispatch(resetHomeAction);
     };
 
@@ -74,6 +91,7 @@ class SignUp extends React.Component<Props, State> {
                     <InputText label="Email" name="email" onChangeText={this.onChange} value={email}
                                error={emailError}/>
                     <InputText label="Password" name="password" onChangeText={this.onChange} value={password}
+                               secureTextEntry={true}
                                error={passwordError}/>
                     <Button title="Sign Up" onPress={this.onSignUp}/>
                 </View>
