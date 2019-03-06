@@ -68,12 +68,12 @@ var SignUp = /** @class */ (function (_super) {
         return _this;
     }
     SignUp.prototype.render = function () {
-        var _a = this.state, name = _a.name, email = _a.email, password = _a.password;
+        var _a = this.state, name = _a.name, email = _a.email, password = _a.password, nameError = _a.nameError, emailError = _a.emailError, passwordError = _a.passwordError;
         return (react_1.default.createElement(react_native_1.View, { style: styles_1.default.container },
             react_1.default.createElement(react_native_1.View, { style: styles_1.default.formContainer },
-                react_1.default.createElement(InputText_Component_1.default, { label: "Name", name: "name", onChangeText: this.onChange, value: name }),
-                react_1.default.createElement(InputText_Component_1.default, { label: "Email", name: "email", onChangeText: this.onChange, value: email }),
-                react_1.default.createElement(InputText_Component_1.default, { label: "Password", name: "password", onChangeText: this.onChange, value: password }),
+                react_1.default.createElement(InputText_Component_1.default, { label: "Name", name: "name", onChangeText: this.onChange, value: name, error: nameError }),
+                react_1.default.createElement(InputText_Component_1.default, { label: "Email", name: "email", onChangeText: this.onChange, value: email, error: emailError }),
+                react_1.default.createElement(InputText_Component_1.default, { label: "Password", name: "password", onChangeText: this.onChange, value: password, error: passwordError }),
                 react_1.default.createElement(Button_Component_1.default, { title: "Sign Up", onPress: this.onSignUp }))));
     };
     return SignUp;

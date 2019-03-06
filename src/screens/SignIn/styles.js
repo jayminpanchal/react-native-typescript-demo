@@ -9,7 +9,8 @@ var styles = react_native_1.StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
+        justifyContent: "space-between"
     },
     heading: {
         textAlign: "center",

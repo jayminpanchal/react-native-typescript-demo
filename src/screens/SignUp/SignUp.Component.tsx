@@ -66,13 +66,15 @@ class SignUp extends React.Component<Props, State> {
     };
 
     render(): React.ReactNode {
-        const {name, email, password} = this.state;
+        const {name, email, password, nameError, emailError, passwordError} = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <InputText label="Name" name="name" onChangeText={this.onChange} value={name}/>
-                    <InputText label="Email" name="email" onChangeText={this.onChange} value={email}/>
-                    <InputText label="Password" name="password" onChangeText={this.onChange} value={password}/>
+                    <InputText label="Name" name="name" onChangeText={this.onChange} value={name} error={nameError}/>
+                    <InputText label="Email" name="email" onChangeText={this.onChange} value={email}
+                               error={emailError}/>
+                    <InputText label="Password" name="password" onChangeText={this.onChange} value={password}
+                               error={passwordError}/>
                     <Button title="Sign Up" onPress={this.onSignUp}/>
                 </View>
             </View>

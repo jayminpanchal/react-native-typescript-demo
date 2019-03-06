@@ -53,6 +53,10 @@ class SignIn extends React.Component<Props, State> {
         this.props.navigation.dispatch(resetHomeAction);
     };
 
+    onSignUp = () => {
+        this.props.navigation.navigate("SignUp");
+    };
+
     onChange = (name, value) => {
         this.setState({
             [name]: value
@@ -71,6 +75,7 @@ class SignIn extends React.Component<Props, State> {
                                error={passwordError}/>
                     <Button title="Sign In" onPress={this.onSignIn}/>
                 </View>
+                <Button title="Sign Up" onPress={this.onSignUp}/>
             </View>
         );
     }

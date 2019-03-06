@@ -4,13 +4,21 @@ import {connect} from "react-redux";
 
 import styles from "./styles";
 
-class Tab1 extends React.Component {
+interface Props {
+    user: object;
+}
+
+class Tab1 extends React.Component<Props> {
 
     render(): React.ReactNode {
+        const {user} = this.props;
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>
-                    Tab 1
+                    Welcome User
+                </Text>
+                <Text style={styles.heading}>
+                    {user.email}
                 </Text>
             </View>
         );
@@ -18,8 +26,9 @@ class Tab1 extends React.Component {
 }
 
 const mapStateToProps = (state: object) => {
-    console.log("state in Home", state);
-    return state;
+    return {
+        user: state.user
+    };
 };
 
 export default connect(mapStateToProps)(Tab1);

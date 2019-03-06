@@ -26,13 +26,16 @@ var Tab1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Tab1.prototype.render = function () {
+        var user = this.props.user;
         return (react_1.default.createElement(react_native_1.View, { style: styles_1.default.container },
-            react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, "Tab 1")));
+            react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, "Welcome User"),
+            react_1.default.createElement(react_native_1.Text, { style: styles_1.default.heading }, user.email)));
     };
     return Tab1;
 }(react_1.default.Component));
 var mapStateToProps = function (state) {
-    console.log("state in Home", state);
-    return state;
+    return {
+        user: state.user
+    };
 };
 exports.default = react_redux_1.connect(mapStateToProps)(Tab1);

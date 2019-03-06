@@ -25,8 +25,8 @@ var Button = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Button.prototype.render = function () {
-        var _a = this.props, title = _a.title, onPress = _a.onPress;
-        return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles_1.default.buttonContainer, onPress: onPress },
+        var _a = this.props, title = _a.title, onPress = _a.onPress, style = _a.style;
+        return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: [style, styles_1.default.buttonContainer], onPress: onPress },
             react_1.default.createElement(react_native_1.Text, { style: styles_1.default.button }, title)));
     };
     return Button;

@@ -48,6 +48,9 @@ var SignIn = /** @class */ (function (_super) {
             _this.props.setUser({ email: email });
             _this.props.navigation.dispatch(AppContainer_1.resetHomeAction);
         };
+        _this.onSignUp = function () {
+            _this.props.navigation.navigate("SignUp");
+        };
         _this.onChange = function (name, value) {
             var _a;
             _this.setState((_a = {},
@@ -68,7 +71,8 @@ var SignIn = /** @class */ (function (_super) {
             react_1.default.createElement(react_native_1.View, { style: styles_1.default.formContainer },
                 react_1.default.createElement(InputText_Component_1.default, { label: "Email", name: "email", onChangeText: this.onChange, value: email, error: emailError }),
                 react_1.default.createElement(InputText_Component_1.default, { label: "Password", name: "password", onChangeText: this.onChange, value: password, secureTextEntry: true, error: passwordError }),
-                react_1.default.createElement(Button_Component_1.default, { title: "Sign In", onPress: this.onSignIn }))));
+                react_1.default.createElement(Button_Component_1.default, { title: "Sign In", onPress: this.onSignIn })),
+            react_1.default.createElement(Button_Component_1.default, { title: "Sign Up", onPress: this.onSignUp })));
     };
     return SignIn;
 }(react_1.default.Component));
